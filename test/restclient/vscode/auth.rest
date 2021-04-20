@@ -1,0 +1,16 @@
+@HOST = http://localhost:3333
+@AUTHORIZATION = Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjE4ODg5NjQ2LCJleHAiOjE2MTk0OTQ0NDZ9.CTY5-SwVvyrrKoRdMgH09kTDIdRPWwS7IM55NAH_nCA
+
+### Login
+POST {{HOST}}/sessions
+Content-Type: application/json
+
+{
+  "email": "admin@fastfeet.com",
+  "password": "123456"
+}
+
+
+### Check
+GET {{HOST}}/sessions
+{{AUTHORIZATION}}

@@ -29,16 +29,33 @@ A aplicação em **React Native** é para o entregador visulizar as entregas e t
 4. **Reactotron** rodando na porta 9090 (**Opcional**)
 
 ### :rocket: Começando
-1. ``git clone https://github.com/GustavoBlaze/gobarber.git``
-2. ``cd gobarber``
+1. ``https://github.com/addanfelipe/fastfeet_microservice_express_postgres_react_js_mobile.git``
+2. ``cd fastfeet_microservice_express_postgres_react_js_mobile``
 
-### :rocket: Iniciando com o backend
-1. ``cd backend``
+### :rocket: Iniciando com docker
+1. ``docker-componse up -d``
+
+### :rocket: Iniciando com o auth_backend
+1. ``cd auth_backend``
 2. ``yarn``
-3. ``Criar o arquivo .env com base no .env.example``
+3. ``Criar o arquivo .env com base no .env.example.docker``
 4. ``yarn sequelize db:migrate``
 5. ``yarn sequelize db:seed:all``
 6. ``yarn dev``
+
+### :rocket: Iniciando com o delivery_backend
+1. ``cd delivery_backend``
+2. ``yarn``
+3. ``Criar o arquivo .env com base no .env.example.docker``
+4. ``yarn sequelize db:migrate``
+5. ``yarn dev``
+
+### :rocket: Iniciando com o problem_backend
+1. ``cd problem_backend``
+2. ``yarn``
+3. ``Criar o arquivo .env com base no .env.example.docker``
+4. ``yarn sequelize db:migrate``
+5. ``yarn dev``
 
 ### 💻 Iniciando com o Front-end 
 1. ``cd frontend``
@@ -65,4 +82,4 @@ Existe um usuário administrador padrão: admin@fastfeet.com / 123456
 - 📷 **React-Native-Camera** - Biblioteca React Native para manusear a camera dentro do app mobile. 
 
 <hr>
-<p align="center"> com 💜 Luiz Gustavo </p>
+<p align="center">Base inicial a partir do repositório https://github.com/GustavoBlaze/fastfeet</p>

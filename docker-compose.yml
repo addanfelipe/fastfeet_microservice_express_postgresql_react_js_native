@@ -1,34 +1,34 @@
 version: '3.8'
 
 volumes:
-  main-data:
+  auth-data:
     driver: local
-  problemas-data:
+  problem-data:
     driver: local
-  entregas-data:
+  delivery-data:
     driver: local
 
 networks:
-  main-network:
+  auth-network:
     driver: bridge
-  problemas-network:
+  problem-network:
     driver: bridge
-  entregas-network:
+  delivery-network:
     driver: bridge
 
 services:
   # Database
-  pgsql-database:
+  auth-pgsql-database:
     image: postgres:12.4-alpine
-    container_name: fastfeet_postgres
+    container_name: fastfeet_auth_postgres
     networks:
-      - main-network
+      - auth-network
     ports:
       - "49165:5432"
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: fastfeet
+      POSTGRES_DB: fastfeet_auth
       LC_ALL: C
     restart: always
     healthcheck:
@@ -36,73 +36,33 @@ services:
       interval: 7s
       timeout: 5s
     volumes:
-      - ./data/pgdata:/var/lib/postgresql/data
+      - ./data/auth/pgdata:/var/lib/postgresql/data
 
   # Cache
-  redis-cache:
+  auth-redis-cache:
     image: redis:alpine
-    container_name: fastfeet_redis
+    container_name: fastfeet_auth_redis
     networks:
-      - main-network
+      - auth-network
     ports:
       - "6380:6379"
     command: redis-server --appendonly yes
     volumes:
-      - ./data/redis:/data
+      - ./data/auth/redis:/data
 
-  # Back-end
-#  fastfeet-backend:
-#    image: node:15.11.0-alpine3.10
-#    container_name: fastfeet_backend
-#    networks:
-#      - main-network
-#    ports:
-#      - "3333:3333"
-#    build: ./backend
-#    working_dir: /app
-#    environment:
-#      - NODE_ENV=development
-#      - PORT=3333
-#    command: "yarn dev"
-#    volumes:
-#      - ./backend:/app
-#    links:
-#      - "pgsql-database:database"
-#      - "redis-cache:cache"
-
-#  # Front-end
-#  fastfeet-frontend:
-#    image: node:15.11.0-alpine3.10
-#    container_name: fastfeet_frontend
-#    networks:
-#      - main-network
-#    ports:
-#      - "3000:3000"
-#    build: ./frontend
-#    working_dir: /app
-#    environment:
-#      - NODE_ENV=development
-#      - PORT=3000
-#    stdin_open: true
-#    command: "yarn start"
-#    volumes:
-#      - ./frontend:/app
-##    links:
-##      - "fastfeet-backend:backend"
-
-### PROBLEMAS
+### PROBLEM
   # Database
-  problemas-pgsql-database:
+  problem-pgsql-database:
     image: postgres:12.4-alpine
-    container_name: fastfeet_problemas_postgres
+    container_name: fastfeet_problem_postgres
     networks:
-      - problemas-network
+      - problem-network
     ports:
       - "49166:5432"
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: fastfeet_problemas
+      POSTGRES_DB: fastfeet_problem
       LC_ALL: C
     restart: always
     healthcheck:
@@ -110,33 +70,33 @@ services:
       interval: 7s
       timeout: 5s
     volumes:
-      - ./data/problemas/pgdata:/var/lib/postgresql/data
+      - ./data/problem/pgdata:/var/lib/postgresql/data
 
   # Cache
-  problemas-redis-cache:
+  problem-redis-cache:
     image: redis:alpine
-    container_name: fastfeet_problemas_redis
+    container_name: fastfeet_problem_redis
     networks:
-      - problemas-network
+      - problem-network
     ports:
       - "6381:6379"
     command: redis-server --appendonly yes
     volumes:
-      - ./data/problemas/redis:/data
+      - ./data/problem/redis:/data
 
-### ENTREGAS
+### DELIVERY
   # Database
-  entregas-pgsql-database:
+  delivery-pgsql-database:
     image: postgres:12.4-alpine
-    container_name: fastfeet_entregas_postgres
+    container_name: fastfeet_delivery_postgres
     networks:
-      - entregas-network
+      - delivery-network
     ports:
       - "49167:5432"
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: fastfeet_entregas
+      POSTGRES_DB: fastfeet_delivery
       LC_ALL: C
     restart: always
     healthcheck:
@@ -144,16 +104,16 @@ services:
       interval: 7s
       timeout: 5s
     volumes:
-      - ./data/entregas/pgdata:/var/lib/postgresql/data
+      - ./data/delivery/pgdata:/var/lib/postgresql/data
 
   # Cache
-  entregas-redis-cache:
+  delivery-redis-cache:
     image: redis:alpine
-    container_name: fastfeet_entregas_redis
+    container_name: fastfeet_delivery_redis
     networks:
-      - entregas-network
+      - delivery-network
     ports:
       - "6382:6379"
     command: redis-server --appendonly yes
     volumes:
-      - ./data/entregas/redis:/data
+      - ./data/delivery/redis:/data

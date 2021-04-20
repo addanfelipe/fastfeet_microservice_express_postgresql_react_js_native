@@ -1,0 +1,21 @@
+@HOST = http://localhost:3334
+@AUTHORIZATION = Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjE4OTUyMTI5LCJleHAiOjE2MTk1NTY5Mjl9.JVKhN_BZvnBZmwjhLhxj92WYuD0nm8bxGmkvNc2xaP0
+
+
+### Store
+POST {{HOST}}/problems
+{{AUTHORIZATION}}
+Content-Type: application/json
+
+{
+  "delivery_id": 1,
+  "description": "Vazio."
+}
+
+### Show
+GET {{HOST}}/problems
+  ?id_in=[1,2,3]
+  &delivery_id_in=[1,2]
+  &fk_exclude=["delivery"]
+  &limit=1000
+{{AUTHORIZATION}}
