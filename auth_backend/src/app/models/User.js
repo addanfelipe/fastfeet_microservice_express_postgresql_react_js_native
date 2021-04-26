@@ -12,6 +12,13 @@ class User extends Model {
       },
       {
         sequelize,
+        indexes: [
+          // Create a unique index on email
+          {
+            unique: true,
+            fields: ['email']
+          },
+        ]
       }
     );
 

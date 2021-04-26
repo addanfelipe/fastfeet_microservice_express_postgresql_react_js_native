@@ -22,7 +22,7 @@ Content-Type: application/json
 
 {
   "name": "Ajhgdj AJhvd DJHvd DJHJH",
-  "email": "ahhsgfhsgfhs@fastfeet.com",
+  "email": "ahhsgfhsgfhas@fastfeet.com",
   "password": "12345678"
 }
 
